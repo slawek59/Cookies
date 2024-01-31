@@ -1,13 +1,16 @@
 ﻿
+
 var cookiesRecipeBook = new CookiesRecipesApp();
 cookiesRecipeBook.Run();
 
-class CookiesRecipesApp
+public class CookiesRecipesApp
 {
 	private readonly RecipesRepository _recipesRepository;
-	private readonly RecipesUserInteraction _recipesUserInteraction;
+	private readonly IRecipesUserInteraction _recipesUserInteraction;
 
-    public CookiesRecipesApp(RecipesRepository recipesRepository, RecipesUserInteraction recipesUserInteraction)
+	//target-typed new expression = new ();
+
+    public CookiesRecipesApp(RecipesRepository recipesRepository, RecipesConsoleUserInteraction recipesUserInteraction)
     {
 		_recipesRepository = recipesRepository;
 		_recipesUserInteraction = recipesUserInteraction;
@@ -39,8 +42,24 @@ class CookiesRecipesApp
 	}
 }
 
-public class RecipesUserInteraction
+public interface IRecipesUserInteraction
 {
+	void ShowMessage(string message);
+	void Exit();
+}
+
+public class RecipesConsoleUserInteraction : IRecipesUserInteraction
+{
+	public void ShowMessage(string message)
+	{
+        Console.WriteLine(message);
+    }
+
+	public void Exit()
+	{
+        Console.WriteLine("Press any key to exit.");
+		Console.ReadKey();
+    }
 }
 
 public class RecipesRepository
