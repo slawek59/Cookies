@@ -1,16 +1,18 @@
 ﻿
 
-var cookiesRecipeBook = new CookiesRecipesApp();
+var cookiesRecipeBook = new CookiesRecipesApp(
+	new RecipesRepository(),
+	new RecipesConsoleUserInteraction());
 cookiesRecipeBook.Run();
 
 public class CookiesRecipesApp
 {
-	private readonly RecipesRepository _recipesRepository;
+	private readonly IRecipesRepository _recipesRepository;
 	private readonly IRecipesUserInteraction _recipesUserInteraction;
 
 	//target-typed new expression = new ();
 
-    public CookiesRecipesApp(RecipesRepository recipesRepository, RecipesConsoleUserInteraction recipesUserInteraction)
+    public CookiesRecipesApp(IRecipesRepository recipesRepository, IRecipesUserInteraction recipesUserInteraction)
     {
 		_recipesRepository = recipesRepository;
 		_recipesUserInteraction = recipesUserInteraction;
@@ -62,6 +64,11 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
     }
 }
 
-public class RecipesRepository
+public interface IRecipesRepository
+{
+
+}
+
+public class RecipesRepository : IRecipesRepository
 {
 }
