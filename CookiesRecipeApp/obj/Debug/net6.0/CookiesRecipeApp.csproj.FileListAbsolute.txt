@@ -1,0 +1,15 @@
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\bin\Debug\net6.0\CookiesRecipeApp.exe
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\bin\Debug\net6.0\CookiesRecipeApp.deps.json
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\bin\Debug\net6.0\CookiesRecipeApp.runtimeconfig.json
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\bin\Debug\net6.0\CookiesRecipeApp.dll
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\bin\Debug\net6.0\CookiesRecipeApp.pdb
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\CookiesRecipeApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\CookiesRecipeApp.AssemblyInfoInputs.cache
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\CookiesRecipeApp.AssemblyInfo.cs
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\CookiesRecipeApp.csproj.CoreCompileInputs.cache
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\CookiesRecipeApp.sourcelink.json
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\CookiesRecipeApp.dll
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\refint\CookiesRecipeApp.dll
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\CookiesRecipeApp.pdb
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\CookiesRecipeApp.genruntimeconfig.cache
+C:\Users\wassl\OneDrive\Pulpit\SLAWOMIR\Kodowanie\Krystyna\KrystynaPillarsOfOOP\CookiesRecipeApp\CookiesRecipeApp\obj\Debug\net6.0\ref\CookiesRecipeApp.dll

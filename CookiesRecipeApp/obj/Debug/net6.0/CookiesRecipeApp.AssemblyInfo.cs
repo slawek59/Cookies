@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CookiesRecipeApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd15c5fe28d1fefee3494346309b3b92045cca1e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f2e003b2ff9e15fc3d3f74a9b5d2d73b63dd387")]
 [assembly: System.Reflection.AssemblyProductAttribute("CookiesRecipeApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CookiesRecipeApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

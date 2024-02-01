@@ -1,9 +1,12 @@
 ﻿
 
+using CookiesRecipeApp.Recipes;
+using CookiesRecipeApp.Recipes.Ingredients;
+
 var cookiesRecipeBook = new CookiesRecipesApp(
 	new RecipesRepository(),
-	new RecipesConsoleUserInteraction());
-cookiesRecipeBook.Run();
+	new RecipesConsoleUserInteraction(new IngredientsRegister()));
+cookiesRecipeBook.Run("recipes.txt");
 
 public class CookiesRecipesApp
 {
@@ -17,28 +20,28 @@ public class CookiesRecipesApp
 		_recipesRepository = recipesRepository;
 		_recipesUserInteraction = recipesUserInteraction;
 	}
-    public void Run()
+    public void Run(string filePath)
 	{
-		var allRecipes = _recipesRepository.ReadAll(filePath);
+		var allRecipes = _recipesRepository.Read(filePath);
 		_recipesUserInteraction.PrintExistingRecipes(allRecipes);
 
 		_recipesUserInteraction.PromptToCreateRecipe();
 
-		var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
+		//var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
 
-		if (ingredients.Count > 0)
-		{
-			var recipes = new Recipe(ingredients);
-			allRecipes.Add(recipe);
-			_recipesRepository.Write(filePath, allRecipes);
+		//if (ingredients.Count > 0)
+		//{
+		//	var recipes = new Recipe(ingredients);
+		//	allRecipes.Add(recipe);
+		//	_recipesRepository.Write(filePath, allRecipes);
 
-			_recipesUserInteraction.ShowMessage("Recipe added:");
-			_recipesUserInteraction.ShowMessage(recipes.ToString());
-		}
-		else
-		{
-			_recipesUserInteraction.ShowMessage("No ingredients have been selected. " + "Recipe will not be saved.");
-		}
+		//	_recipesUserInteraction.ShowMessage("Recipe added:");
+		//	_recipesUserInteraction.ShowMessage(recipes.ToString());
+		//}
+		//else
+		//{
+		//	_recipesUserInteraction.ShowMessage("No ingredients have been selected. " + "Recipe will not be saved.");
+		//}
 
 		_recipesUserInteraction.Exit();
 	}
@@ -48,11 +51,35 @@ public interface IRecipesUserInteraction
 {
 	void ShowMessage(string message);
 	void Exit();
+	void PrintExistingRecipes(IEnumerable<Recipe> allRecipes);
+	void PromptToCreateRecipe();
+}
+
+public class IngredientsRegister
+{
+	public IEnumerable<Ingredient> All { get; } = new List<Ingredient>
+	{
+		new WheatFlour(),
+		new SpeltFlour(),
+		new Butter(),
+		new Chocolate(),
+		new Sugar(),
+		new Cardamon(),
+		new Cinnamon(),
+		new CocoaPowder(), 
+	};
 }
 
 public class RecipesConsoleUserInteraction : IRecipesUserInteraction
 {
-	public void ShowMessage(string message)
+	private readonly IngredientsRegister _ingredientsRegister;
+
+    public RecipesConsoleUserInteraction(IngredientsRegister ingredientsRegister)
+    {
+		_ingredientsRegister = ingredientsRegister;
+	}
+
+    public void ShowMessage(string message)
 	{
         Console.WriteLine(message);
     }
@@ -62,13 +89,58 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
         Console.WriteLine("Press any key to exit.");
 		Console.ReadKey();
     }
+
+	public void PrintExistingRecipes(IEnumerable<Recipe> allRecipes)
+	{
+		if (allRecipes.Count() > 0)
+		{
+            Console.WriteLine("Existing recipes are:" + Environment.NewLine);
+
+			var counter = 1;
+			foreach (var recipe in allRecipes)
+			{
+                Console.WriteLine($"*****{counter}*****");
+				Console.WriteLine(recipe);
+				Console.WriteLine();
+				++counter;
+            }
+        }
+	}
+
+	public void PromptToCreateRecipe()
+	{
+        Console.WriteLine("Create a new cookie recipe! " + "Available ingredients are:");
+
+		foreach (var ingredient in _ingredientsRegister.All)
+		{
+            Console.WriteLine(ingredient);
+        }
+    }
 }
 
 public interface IRecipesRepository
 {
-
+	List<Recipe> Read(object filePath);
 }
 
 public class RecipesRepository : IRecipesRepository
 {
+	public List<Recipe> Read(object filePath)
+	{
+		return new List<Recipe>
+		{
+			new Recipe(new List<Ingredient>
+			{
+				new WheatFlour(),
+				new Butter(),
+				new Sugar()
+			}),
+			new Recipe(new List<Ingredient>
+			{
+				new CocoaPowder(),
+				new SpeltFlour(),
+				new Cinnamon()
+			})
+		};
+	}
 }
