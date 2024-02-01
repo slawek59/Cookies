@@ -4,7 +4,8 @@ using CookiesRecipeApp.Recipes;
 using CookiesRecipeApp.Recipes.Ingredients;
 
 var cookiesRecipeBook = new CookiesRecipesApp(
-	new RecipesRepository(),
+	new RecipesRepository(
+		new StringsTextualRepository()),
 	new RecipesConsoleUserInteraction(new IngredientsRegister()));
 cookiesRecipeBook.Run("recipes.txt");
 
@@ -27,21 +28,21 @@ public class CookiesRecipesApp
 
 		_recipesUserInteraction.PromptToCreateRecipe();
 
-		//var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
+		var ingredients = _recipesUserInteraction.ReadIngredientsFromUser();
 
-		//if (ingredients.Count > 0)
-		//{
-		//	var recipes = new Recipe(ingredients);
-		//	allRecipes.Add(recipe);
-		//	_recipesRepository.Write(filePath, allRecipes);
+		if (ingredients.Count() > 0)
+		{
+			var recipe = new Recipe(ingredients);
+			allRecipes.Add(recipe);
+			_recipesRepository.Write(filePath, allRecipes);
 
-		//	_recipesUserInteraction.ShowMessage("Recipe added:");
-		//	_recipesUserInteraction.ShowMessage(recipes.ToString());
-		//}
-		//else
-		//{
-		//	_recipesUserInteraction.ShowMessage("No ingredients have been selected. " + "Recipe will not be saved.");
-		//}
+			_recipesUserInteraction.ShowMessage("Recipe added:");
+			_recipesUserInteraction.ShowMessage(recipe.ToString());
+		}
+		else
+		{
+			_recipesUserInteraction.ShowMessage("No ingredients have been selected. " + "Recipe will not be saved.");
+		}
 
 		_recipesUserInteraction.Exit();
 	}
@@ -53,6 +54,7 @@ public interface IRecipesUserInteraction
 	void Exit();
 	void PrintExistingRecipes(IEnumerable<Recipe> allRecipes);
 	void PromptToCreateRecipe();
+	IEnumerable<Ingredient> ReadIngredientsFromUser();
 }
 
 public class IngredientsRegister
@@ -68,6 +70,18 @@ public class IngredientsRegister
 		new Cinnamon(),
 		new CocoaPowder(), 
 	};
+
+	public Ingredient GetBy(int id)
+	{
+		foreach (var ingredient in All)
+		{
+			if(ingredient.Id == id)
+			{
+				return ingredient;
+			}
+		}
+		return null;
+	}
 }
 
 public class RecipesConsoleUserInteraction : IRecipesUserInteraction
@@ -116,15 +130,51 @@ public class RecipesConsoleUserInteraction : IRecipesUserInteraction
             Console.WriteLine(ingredient);
         }
     }
+
+	public IEnumerable<Ingredient> ReadIngredientsFromUser()
+	{
+		bool shallStop = false;
+		var ingredients = new List<Ingredient>();
+
+		while (!shallStop)
+		{
+			Console.WriteLine("Add ingredient by its ID, " + "or type anything else if finished.");
+
+			var userInput = Console.ReadLine();
+			
+			if (int.TryParse(userInput, out int id))
+			{
+				var selectedIngredient = _ingredientsRegister.GetBy(id);
+				if (selectedIngredient is not null)
+				{
+					ingredients.Add(selectedIngredient);
+				}
+			}
+			else
+			{
+				shallStop = true;
+			}
+        }
+
+		return ingredients;
+	}
 }
 
 public interface IRecipesRepository
 {
 	List<Recipe> Read(object filePath);
+	void Write(string filePath, List<Recipe> allRecipes);
 }
 
 public class RecipesRepository : IRecipesRepository
 {
+	private readonly IStringsRepository _stringsRepository;
+
+	public RecipesRepository(IStringsRepository stringsRepository)
+	{
+		_stringsRepository = stringsRepository;
+	}
+
 	public List<Recipe> Read(object filePath)
 	{
 		return new List<Recipe>
@@ -142,5 +192,43 @@ public class RecipesRepository : IRecipesRepository
 				new Cinnamon()
 			})
 		};
+	}
+
+	public void Write(string filePath, List<Recipe> allRecipes)
+	{
+		var recipesAsStrings = new List<string>();
+		foreach (var recipe in allRecipes)
+		{
+			var allIds = new List<int>();
+			foreach (var ingredient in recipe.Ingredients)
+			{
+				allIds.Add(ingredient.Id);
+			}
+			recipesAsStrings.Add(string.Join(",", allIds));
+		}
+
+		_stringsRepository.Write(filePath, recipesAsStrings);
+	}
+}
+
+public interface IStringsRepository
+{
+	List<string> Read(string filePath);
+	void Write(string filePath, List<string> strings);
+}
+
+public class StringsTextualRepository : IStringsRepository
+{
+	private static readonly string Separator = Environment.NewLine;
+
+	public List<string> Read(string filePath)
+	{
+		var fileContents = File.ReadAllText(filePath);
+		return fileContents.Split(Separator).ToList();
+	}
+
+	public void Write(string filePath, List<string> strings)
+	{
+		File.WriteAllText(filePath, string.Join(Separator, strings));
 	}
 }
