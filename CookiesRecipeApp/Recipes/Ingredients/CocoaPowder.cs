@@ -1,8 +1,7 @@
-﻿namespace CookiesRecipeApp.Recipes.Ingredients
-{
+﻿namespace CookiesRecipeApp.Recipes.Ingredients;
+
     public class CocoaPowder : Ingredient
     {
         public override int Id => 8;
         public override string Name => "Cocoa Powder";
     }
-}
